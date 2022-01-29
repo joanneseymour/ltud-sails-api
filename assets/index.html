@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Let the universe decide</title>
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--
+    Stylesheets and Preprocessors
+    ==============================
+    You can always bring in CSS files manually with `<link>` tags, or asynchronously
+    using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+    of Sails' conventional asset pipeline (boilerplate Gruntfile).
+    By default, stylesheets from your `assets/styles` folder are included
+    here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+    are supported. In production, your styles will be minified and concatenated into
+    a single file.
+    To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+    For example, here are a few things you could do:
+    + Change the order of your CSS files
+    + Import stylesheets from other directories
+    + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+    <!--STYLES-->
+    <script src="https://kit.fontawesome.com/592e143e6f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/fontawesome-free-5.15.4-web/css/all.css">
+    <link rel="stylesheet" href="../assets/fontawesome-free-5.15.4-web/css/solid.css">
+    <link rel="stylesheet" href="styles/style.css">   
+    <!--STYLES END-->
+  </head>
+  <body style = "height: 100%; background-image: url(./images/sky-1281662_1280.jpg); background-size: cover; background-repeat: no-repeat;">
+    <div id = "container">
+      <nav>
+          <ul>
+              <li id="decideNavbarLi" class="navbarLi"><a href="#" class="navbarA">Decide</a>
+              </li>
+              <li id="viewNavbarLi" class="navbarLi"><a href="#" class="navbarA">View
+                      all activities</a></li>
+              <li id="addNavbarLi" class="navbarLi"><a href="#" class="navbarA">Add
+                      activities</a></li>
+          </ul>
+      </nav>
+      <div id = "decideMainDiv" class = "main coloured-border">
+          <h2>What should you do next?</h2>
+          <div id=decideButtonDiv>
+              <button id="decideButton">Decide</button>
+          </div>
+          <div id = "refineDiv">
+              <h4>
+                  <i id = "refineCaret" class="fas fa-caret-right"></i>&nbsp;&nbsp;Refine your decision...</div>
+              </h4>
+  
+          
+          <div id="locationContainer">
+              <h4>Choose your location:</h4>
+              <div id="locationRadiosDiv">
+                  <input type="radio" id="atWorkRadio" class="radios" name="location" value="atWork">
+                  <label for="atWork">At work</label>
+                  <br>
+                  <input type="radio" id="atHomeRadio" class="radios" name="location" value="atHome">
+                  <label for="atHome">At home</label><br>
+              </div>
+          </div>
+  
+  
+          <div id="tagsContainer">
+              <h4>Choose your tags:</h4>
+              <div id="tagCheckboxesDiv">
+                  <input type="checkbox" id="funCheckbox" class="tagCheckboxes" name="funCheckbox" value="fun">
+                  <label for="fun"> Fun shit</label><br>
+  
+                  <input type="checkbox" id="houseworkCheckbox" class="tagCheckboxes" name="houseworkCheckbox"
+                      value="housework">
+                  <label for="housework"> Housework</label><br>
+  
+                  <input type="checkbox" id="learningCheckbox" class="tagCheckboxes" name="learningCheckbox"
+                      value="learning">
+                  <label for="learning"> Learning</label><br>
+  
+                  <input type="checkbox" id="toDoCheckbox" class="tagCheckboxes" name="toDoCheckbox" value="toDo">
+                  <label for="toDo"> To do list</label><br>
+              </div>
+          </div>
+  
+  
+          <div id="decision"><br></div>
+      </div> <!--decideMainDiv-->
+  
+      <div id = "viewActivitiesMainDiv" class = "main coloured-border">
+          <div id="viewActivitiesContainer">
+              <h2>Your activities</h2>
+              <div id = "manageActivitiesDiv">
+                  <button id = "goToAddActivitiesButton">Add </button>
+                  <button id = "editActivitiesButton">Edit </button>
+                  <button id = "clearButton">Clear </button>
+              </div>
+              <div id="allActivitiesDiv"></div>
+          </div>
+      </div> <!--viewActivitiesMainDiv-->
+  
+      <div id = "addActivitiesMainDiv" class = "main coloured-border">
+          <div id = "addActivityDiv">
+          <h2 id = "addActivityH2">Add activities</h2>
+      
+      
+          <div id = "addActivityNameDiv">
+              <label id = "addActivityNameLabel"for="addActivityNameInput">Activity name:</label>
+              <input id = "addActivityNameInput" type = "text">
+          </div>
+          <div id = addLocationTagsContainer>
+          <div id = "addLocationContainer">
+              <h4 id = >Location:</h4>
+              <input type="checkbox" id="addAtWorkCheckbox" class = "addLocationCheckboxes" name="addLocation" value="addAtWork">
+              <label for="addAtWork">At work</label>       
+              <br>
+              <input type="checkbox" id="addAtHomeCheckbox" class = "addLocationCheckboxes" name="addLocation" value="addAtHome">
+              <label for="addAtHome">At home</label>
+              <br>
+              <input type="checkbox" id="addOtherLocationCheckbox" class = "addLocationCheckboxes" name="addLocation" value="addOtherLocation">
+              <label for="addOtherLocation">Other (please enter)</label>
+              <input id = "addOtherLocationInput" type = "text" placeholder="e.g. outside">
+          </div>
+      
+      
+          <div id = "addTagsContainer">
+              <h4>Tags:</h4>
+              <input type="checkbox" id="addFunCheckbox" class = "addTagCheckboxes" name="addFunCheckbox" value="addFun">
+              <label for="addFun"> Fun stuff</label><br> 
+      
+              <input type="checkbox" id="addHouseworkCheckbox" class = "addTagCheckboxes" name="addHouseworkCheckbox" value="addHousework">
+              <label for="addHousework"> Housework</label><br> 
+      
+              <input type="checkbox" id="addLearningCheckbox" class = "addTagCheckboxes" name="addLearningCheckbox" value="addLearning">
+              <label for="addLearning"> Learning</label><br>  
+      
+              <input type="checkbox" id="addToDoCheckbox" class = "addTagCheckboxes" name="addToDoCheckbox" value="addToDo">
+              <label for="addToDo"> To do list</label><br>  
+              <div id = "addOtherTagContainer"></div>
+              <input type="checkbox" id="addOtherTagCheckbox" class = "addTagCheckboxes" name="addOtherTagCheckbox" value="addOtherTag">
+      
+                  <label for="addOtherTagCheckbox" id = addOtherTagCheckboxLabel> Other (please enter)</label>
+                  <input id = "addOtherTagInput" type = "text" placeholder="e.g. relaxing">
+              </div>
+      
+              <br>  
+          </div>
+      </div>
+      
+          <div id = "buttonsRow">
+              <button id = "saveButton">Save activity</button>
+              <button id = "clearFormButton">Clear form</button>
+              <div id = "addActivityFeedback"></div>
+          </div>
+      </div>
+  </div>  <!-- container -->
+    <!--
+    Client-side Templates
+    ========================
+    HTML templates are important prerequisites of modern, rich client applications.
+    To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+    that you load these templates client-side.
+    By default, your Gruntfile is configured to automatically load and precompile
+    client-side JST templates in your `assets/templates` folder, then
+    include them here automatically (between TEMPLATES and TEMPLATES END).
+    To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
+    For example, here are a few things you could do:
+    + Import templates from other directories
+    + Use a different template engine (handlebars, jade, dust, etc.)
+    + Internationalize your client-side templates using a server-side
+    stringfile before they're served.
+    -->
+    <!--TEMPLATES-->
+    <!--TEMPLATES END-->
+    <!--
+    Client-side Javascript
+    ========================
+    You can always bring in JS files manually with `script` tags, or asynchronously
+    on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+    take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
+    By default, files in your `assets/js` folder are included here
+    automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
+    CoffeeScript (.coffee) are supported. In production, your scripts will be minified
+    and concatenated into a single file.
+    To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+    For example, here are a few things you could do:
+    + Change the order of your scripts
+    + Import scripts from other directories
+    + Use a different preprocessor, like TypeScript
+    -->
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <!--SCRIPTS END-->
+
+  </body>
+</html>
