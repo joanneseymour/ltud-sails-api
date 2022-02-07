@@ -1,5 +1,3 @@
-let viewActivitiesMainDiv = document.getElementById("viewActivitiesMainDiv");
-viewActivitiesMainDiv.style = "display: none";
 let addActivitiesMainDiv = document.getElementById("addActivitiesMainDiv");
 addActivitiesMainDiv.style = "display: none"
 let mainDivs = document.getElementsByClassName("main");

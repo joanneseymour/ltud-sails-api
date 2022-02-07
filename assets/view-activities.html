@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Let the universe decide</title>
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <!--STYLES-->
+    <script src="https://kit.fontawesome.com/592e143e6f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/fontawesome-free-5.15.4-web/css/all.css">
+    <link rel="stylesheet" href="../assets/fontawesome-free-5.15.4-web/css/solid.css">
+    <link rel="stylesheet" href="styles/style.css">   
+    <!--STYLES END-->
+  </head>
+  <body style = "height: 100%; background-image: url(./images/sky-1281662_1280.jpg); background-size: cover; background-repeat: no-repeat;">
+    <div id = "container">
+        <nav>
+            <ul>
+                <li id="decideNavbarLi" class="navbarLi"><a href="index.html" class="navbarA">Decide</a>
+                </li>
+                <li id="viewNavbarLi" class="navbarLi"><a href="view-activities.html" class="navbarA">View
+                        all activities</a></li>
+                <li id="addNavbarLi" class="navbarLi"><a href="add-activities.html" class="navbarA">Add activities</a></li>
+            </ul>
+        </nav>
+      <div id = "viewActivitiesMainDiv" class = "main coloured-border">
+          <div id="viewActivitiesContainer">
+              <h2>Your activities</h2>
+              <div id = "manageActivitiesDiv">
+                  <button id = "goToAddActivitiesButton">Add </button>
+                  <button id = "editActivitiesButton">Edit </button>
+                  <button id = "clearButton">Clear </button>
+              </div>
+              <div id="allActivitiesDiv"></div>
+          </div>
+      </div> <!--viewActivitiesMainDiv-->
+  </div>  <!-- container -->
+ 
+    <!--SCRIPTS-->
+    <script src="/assets/js/ltud.js"></script>
+    <script src="/js/dependencies/sails.io.js"></script>
+    <!--SCRIPTS END-->
+
+  </body>
+</html>
