@@ -3,7 +3,7 @@ addActivitiesMainDiv.style = "display: none"
 let mainDivs = document.getElementsByClassName("main");
 let navbarLis = document.getElementsByClassName("navbarLi");
 let decideNavbarLi = document.getElementById("decideNavbarLi");
-decideNavbarLi.classList.add("active");
+// decideNavbarLi.classList.add("active");
 let viewNavbarLi = document.getElementById("viewNavbarLi");
 let addNavbarLi = document.getElementById("addNavbarLi");
 
@@ -89,46 +89,23 @@ decideNavbarLi.onclick = function(){
   makeNavbarLiActive(decideNavbarLi);
 }
 
-viewNavbarLi.onclick = function(){
-  showMainDiv(viewActivitiesMainDiv);
-  makeNavbarLiActive(viewNavbarLi);
-}
-
-addNavbarLi.onclick = function(){
-  showMainDiv(addActivitiesMainDiv);
-  uncheckCheckboxes(addTagCheckboxes);
-  uncheckCheckboxes(addLocationCheckboxes);
-  makeNavbarLiActive(addNavbarLi);
-}
-
 goToAddActivitiesButton.onclick = function(){
   showMainDiv(addActivitiesMainDiv);
   makeNavbarLiActive(addNavbarLi);
 }
 
-function showMainDiv(divToShow){
-  for (i = 0; i < mainDivs.length; i++){
-    let mainDiv = mainDivs[i];
-    if(mainDiv == divToShow){
-      divToShow.style = "display: grid";
-    } else {
-      mainDiv.style = "display: none";
-    }
-  }
-  divToShow.style = "display: grid";
-}
 
-function makeNavbarLiActive(clickedNavbarLi){
-  decideNavbarLi.classList.remove("active");
-  for (i = 0; i < navbarLis.length; i++){
-    let navbarLi = navbarLis[i];
-    if (navbarLi == clickedNavbarLi){
-      navbarLi.classList.add("active");
-    } else {
-      navbarLi.classList.remove("active");
-    }
-  }
-}
+// function makeNavbarLiActive(clickedNavbarLi){
+//   decideNavbarLi.classList.remove("active");
+//   for (i = 0; i < navbarLis.length; i++){
+//     let navbarLi = navbarLis[i];
+//     if (navbarLi == clickedNavbarLi){
+//       navbarLi.classList.add("active");
+//     } else {
+//       navbarLi.classList.remove("active");
+//     }
+//   }
+// }
 
 document.getElementById("refineDiv").onclick = function(){
   // if (refineCaret.classList.contains("fa-caret-right") && locationContainer.style == "display: none"){
