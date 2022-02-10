@@ -95,7 +95,7 @@ a{
     border-radius: 12px 12px 0px 0px;
     margin: 0px;
     border-bottom: none !important;
-    background-color: #2F333C;
+    background-color: #2F333C !important;
     /* padding-top: 12px; */
 }
 

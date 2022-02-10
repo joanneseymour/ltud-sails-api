@@ -1,9 +1,9 @@
-// let addActivitiesMainDiv = document.getElementById("addActivitiesMainDiv");
-// addActivitiesMainDiv.style = "display: none"
+let addActivitiesMainDiv = document.getElementById("addActivitiesMainDiv");
+addActivitiesMainDiv.style = "display: none"
 let mainDivs = document.getElementsByClassName("main");
 let navbarLis = document.getElementsByClassName("navbarLi");
 let decideNavbarLi = document.getElementById("decideNavbarLi");
-// decideNavbarLi.classList.add("active");
+decideNavbarLi.classList.add("active");
 let viewNavbarLi = document.getElementById("viewNavbarLi");
 let addNavbarLi = document.getElementById("addNavbarLi");
 
@@ -187,6 +187,40 @@ function clearArrays(){
   canDoThis = [];
 }
 
+function populateActivityList() {
+  allActivitiesList = "<ol>";
+  for (n = 0; n < activities.length; n++) {
+    // called it n because i was getting the value of 3 from somewhere else
+    let activity = activities[n];
+    if (n == 0){
+      allActivitiesDiv.innerHTML =  "<ol>";
+    }
+    activityLi = `<li id = 'activityLi${n}'>${activity.activityName}<span id = 'deleteActivityIcon${n}' class = 'deleteActivityIcons'><i class='fas fa-times'></i></span></li>`;
+
+    allActivitiesList += activityLi;
+    if (n == allActivitiesList.length){
+      allActivitiesDiv.innerHTML += "</ol>";
+    }
+    allActivitiesDiv.innerHTML = allActivitiesList;
+  } // for loop
+  addDeleteButtonsListener();
+}
+
+function addDeleteButtonsListener(){
+  document.querySelectorAll('.deleteActivityIcons').forEach(item => {
+    item.addEventListener('click', event => {
+      clickedSpan = item.outerHTML;
+      let taskId = clickedSpan.substring(28);
+      taskId = taskId.split('"')[0];
+      console.log(`taskId is now ${taskId}`);
+      console.log(`activities was ${activities}`);
+      let removedActivities = activities.splice(taskId, 1);
+      console.log(`removedActivities is ${removedActivities}\nactivities is now ${activities}`);
+      populateActivityList();
+    })
+  })
+  }
+
 function getAjaxObject() {
   var ajaxRequest;
   try {
@@ -243,10 +277,121 @@ decision.innerHTML = doThis;
 clearArrays();
 }
 
+// saveButton.onclick = function(){
+//   console.log(`after pressing save button, activities array is:\n${activities}`);
+//   allActivitiesList.style = "text-align: left";
+//   newActivityName = addActivityNameInput.value;
+//   addLocationsToNewActivity();
+//   addTagsToNewActivity();
+//   activities.push({
+//     activityName: newActivityName,
+//     location: newLocationsArray,
+//     tags: newTagsArray
+//   });
+//   console.log(`in the middle of save function, activities array is:\n${activities}`);
+
+//   allActivitiesList = allActivitiesList.substring(0,allActivitiesList.length-5);
+//   if (activities.length == 1){
+//     allActivitiesList += `<ol>`;
+//   }
+//   allActivitiesList += `<li>${newActivityName}</li></ol>`;
+//   console.log(`newActivityName is ${newActivityName}`);
+//   allActivitiesDiv.innerHTML = allActivitiesList;
+//   allActivitiesDiv.style = "padding: 0px";
+//   addActivityNameInput.value = "";
+//   console.log("Added: \n" + (activities[activities.length-1]).activityName + "\n" + (activities[activities.length-1]).location + "\n" +(activities[activities.length-1]).tags);
+//   addOtherLocationInput.value = "";
+//   addOtherTagInput.value = "";
+//   sayActivitySaved();
+//   uncheckCheckboxes(addLocationCheckboxes);
+//   uncheckCheckboxes(addTagCheckboxes);
+// }
+
+saveButton.onclick = function(){
+  allActivitiesList.style = "text-align: left";
+  newActivityName = addActivityNameInput.value;
+  addLocationsToNewActivity();
+  addTagsToNewActivity();
+  console.log(`before push, there were ${activities.length} activities`);
+  activities.push({
+    activityName: newActivityName,
+    location: newLocationsArray,
+    tags: newTagsArray
+  });
+  console.log(`after push, there are ${activities.length} activities`);
+  populateActivityList(); // adds to dom and array, adds delete button functionality
+  console.log(`after populateList, there are ${activities.length} activities`);
+  allActivitiesDiv.style = "padding: 0px";
+  addActivityNameInput.value = "";
+  addOtherLocationInput.value = "";
+  addOtherTagInput.value = "";
+  sayActivitySaved();
+  uncheckCheckboxes(addLocationCheckboxes);
+  uncheckCheckboxes(addTagCheckboxes);
+}
+
+
+function sayActivitySaved(){
+  addActivityFeedback.innerHTML = "Activity was saved!";
+  setTimeout(function(){ 
+    addActivityFeedback.innerHTML = "";
+   }, 2000);
+}
+
 function uncheckCheckboxes(checkboxes){
   for (i = 0; i < checkboxes.length; i++) {
     checkboxes[i].checked = false;
   }
+}
+function addLocationsToNewActivity(){
+  for (i = 0; i < addLocationCheckboxes.length; i++) {
+    let addLocationCheckbox = addLocationCheckboxes[i];
+    if (addLocationCheckbox.checked) {
+      if (addLocationCheckbox.value == "addAtWork"){
+        newLocationsArray.push("atWork");
+      } else if (addLocationCheckbox.value == "addAtHome"){
+        newLocationsArray.push("atHome");
+      } else if (addLocationCheckbox.value == "addOtherLocation"){
+        newLocationString = addOtherLocationInput.value;
+        newLocationStringCondensed = (newLocationString.split(" ").join("")).trim();
+        newLocationsArray.push(newLocationStringCondensed);
+        addNewOptionToUI(newLocationStringCondensed, newLocationString, locationRadiosDiv, "radio", "radios", "location");
+      }
+    }
+  }
+}
+
+function addTagsToNewActivity(){
+  for (i = 0; i < addTagCheckboxes.length; i++) {
+    let addTagCheckbox = addTagCheckboxes[i];
+    if (addTagCheckbox.checked) {
+      if (addTagCheckbox.value == "addFun"){
+        newTagsArray.push("fun");
+      } else if (addTagCheckbox.value == "addHousework"){
+        newTagsArray.push("housework");
+      } else if (addTagCheckbox.value == "addToDo"){
+        newTagsArray.push("toDo");
+      } else if (addTagCheckbox.value == "addOtherTag"){
+        newTagString = addOtherTagInput.value;
+        newTagStringCondensed = (newTagString.split(" ").join("")).trim();
+        newTagsArray.push(newTagStringCondensed);
+        addNewOptionToUI(newTagStringCondensed, newTagString, tagCheckboxesDiv, "checkbox", "checkboxes", newTagStringCondensed + "checkbox",  );
+      }
+    }
+  }
+}
+
+addOtherTagCheckbox.onclick = function(){
+  showHideAddInput(addOtherTagCheckbox, addOtherTagInput);
+}
+
+addOtherLocationCheckbox.onclick = function(){
+  showHideAddInput(addOtherLocationCheckbox, addOtherLocationInput);
+}
+
+function addNewOptionToUI(newStringCondensed, newString, divToUpdate, inputType, classToUpdate, inputName){
+    divToUpdate.innerHTML += `<input type="${inputType}" id="${newStringCondensed}${inputType}" class = ${classToUpdate}" name="${inputName}" value="${newStringCondensed}"><label for="${newStringCondensed}">&nbsp${newString}</label><br>`;
+
 }
 
 function showHideAddInput(checkbox, input){
@@ -257,8 +402,17 @@ function showHideAddInput(checkbox, input){
   }
 }
 
+clearButton.onclick = function(){
+  activities = [];
+  allActivitiesList = "";
+  console.log(`After pressing clearbutton, allActivitiesList is ${allActivitiesList}`);
+  allActivitiesDiv.style = "padding: 48px 12px; text-align: center;"
+  allActivitiesDiv.innerHTML = "You currently have no activities";
+  console.log(`After clearing, activities array is now ${activities}`);
+}
+console.log("HI");
 uncheckCheckboxes(tagCheckboxes);
-// populateActivityList();
+populateActivityList();
 
 
 
